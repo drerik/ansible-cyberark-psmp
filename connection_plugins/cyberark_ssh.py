@@ -283,9 +283,14 @@ class Connection(ConnectionBase):
     def __init__(self, *args, **kwargs):
         super(Connection, self).__init__(*args, **kwargs)
 
-        self.host = self._play_context.remote_addr
         self.port = self._play_context.port
         self.user = self._play_context.remote_user
+
+        # Customisation CyberArk    
+        cyberark_user = os.environ.get('CYB_USER', 'psmp_user')
+        cyberark_server = os.environ.get('CYB_SERVER', 'psmp.mycompany.com')
+        self.host = cyberark_user + "@" + self._play_context.remote_user + "@" + self._play_context.remote_addr + "@" + cyberark_server
+
         self.control_path = C.ANSIBLE_SSH_CONTROL_PATH
         self.control_path_dir = C.ANSIBLE_SSH_CONTROL_PATH_DIR
 

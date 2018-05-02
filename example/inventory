@@ -1,4 +1,4 @@
-server1 ansible_host='djamelb_admin@root@192.168.48.111@192.168.48.110' ansible_connection=cyberark_ssh
+server1 ansible_user=root ansible_host='192.168.48.111' ansible_connection=cyberark_ssh
 
 [servers]
 server1
